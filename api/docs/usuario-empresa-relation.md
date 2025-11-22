@@ -63,7 +63,27 @@ O desde Supabase SQL Editor:
 
 ## Endpoints de Empresas
 
-### 1. Crear Empresa (ADMIN)
+### 1. Listar Empresas (ID y Nombre) - PÚBLICO ⭐
+```bash
+GET /empresas/lista
+# No requiere autenticación
+
+# Respuesta:
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "nombre": "Tech Solutions S.A."
+  },
+  {
+    "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+    "nombre": "Innovación Digital Corp."
+  }
+]
+```
+
+**Uso:** Este endpoint es ideal para mostrar un selector de empresas en el formulario de registro.
+
+### 2. Crear Empresa (ADMIN)
 ```bash
 POST /empresas
 Authorization: Bearer <token>
@@ -76,25 +96,25 @@ Content-Type: application/json
 }
 ```
 
-### 2. Listar Empresas (ADMIN, RRHH)
+### 3. Listar Todas las Empresas con Información Completa (ADMIN)
 ```bash
 GET /empresas
 Authorization: Bearer <token>
 ```
 
-### 3. Obtener Empresa por ID (ADMIN, RRHH)
+### 4. Obtener Empresa por ID (ADMIN)
 ```bash
 GET /empresas/:id
 Authorization: Bearer <token>
 ```
 
-### 4. Obtener Usuarios de una Empresa (ADMIN, RRHH)
+### 5. Obtener Usuarios de una Empresa (ADMIN)
 ```bash
 GET /empresas/:id/usuarios
 Authorization: Bearer <token>
 ```
 
-### 5. Actualizar Empresa (ADMIN)
+### 6. Actualizar Empresa (ADMIN)
 ```bash
 PATCH /empresas/:id
 Authorization: Bearer <token>
@@ -106,7 +126,7 @@ Content-Type: application/json
 }
 ```
 
-### 6. Eliminar Empresa (ADMIN)
+### 7. Eliminar Empresa (ADMIN)
 ```bash
 DELETE /empresas/:id
 Authorization: Bearer <token>
@@ -114,19 +134,33 @@ Authorization: Bearer <token>
 
 ## Registro de Usuario con Empresa
 
-Al registrar un nuevo usuario, **ES OBLIGATORIO** incluir `empresa_id`:
+Al registrar un nuevo usuario, **ES OBLIGATORIO** incluir `empresa_id`.
+
+**Flujo recomendado:**
+1. Listar empresas disponibles con `GET /empresas/lista` (público, no requiere token)
+2. Mostrar selector con los nombres de empresas
+3. Registrar usuario con el `empresa_id` seleccionado
 
 ```bash
-POST /auth/register
-Content-Type: application/json
+# Paso 1: Obtener lista de empresas (PÚBLICO)
+curl -X GET http://localhost:3005/empresas/lista
 
-{
-  "nombre": "Juan Pérez",
-  "email": "juan@example.com",
-  "password": "password123",
-  "rol": "EMPLEADO",
-  "empresa_id": "550e8400-e29b-41d4-a716-446655440000"
-}
+# Respuesta:
+# [
+#   { "id": "550e8400-...", "nombre": "Tech Solutions S.A." },
+#   { "id": "6ba7b810-...", "nombre": "Innovación Digital Corp." }
+# ]
+
+# Paso 2: Registrar usuario con empresa_id
+curl -X POST http://localhost:3005/auth/register \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "nombre": "Juan Pérez",
+    "email": "juan@example.com",
+    "password": "password123",
+    "rol": "EMPLEADO",
+    "empresa_id": "550e8400-e29b-41d4-a716-446655440000"
+  }'
 ```
 
 ### Validaciones al registrar:
@@ -281,9 +315,9 @@ GROUP BY e.id, e.nombre;
 5. **Validación de Duplicados**: El sistema valida automáticamente que no se creen empresas con nombres duplicados
 6. **Permisos**: 
    - Solo ADMIN puede crear/actualizar/eliminar empresas
-   - ADMIN y RRHH pueden ver empresas y sus usuarios
-   - EMPLEADO no tiene acceso a endpoints de empresas
-7. **Flujo Recomendado**: Crear primero la empresa (como ADMIN) y luego registrar usuarios con ese `empresa_id`
+   - Solo ADMIN puede ver información completa de empresas y sus usuarios
+   - Cualquier persona puede ver la lista de nombres e IDs (endpoint público `/empresas/lista`)
+7. **Flujo Recomendado**: Usar el endpoint público `/empresas/lista` para obtener empresas disponibles antes de registrar usuarios
 
 ## Próximas Mejoras
 
