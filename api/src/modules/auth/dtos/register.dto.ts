@@ -36,9 +36,10 @@ export class RegisterDto {
   password: string;
 
   @ApiProperty({
-    description: 'Rol del usuario en el sistema',
+    description: 'Rol del usuario en el sistema. Opciones: EMPLEADO (usuario regular), RRHH (recursos humanos), ADMIN (administrador)',
     enum: Rol,
     example: Rol.EMPLEADO,
+    enumName: 'Rol',
   })
   @IsEnum(Rol, { message: 'El rol debe ser EMPLEADO, RRHH o ADMIN' })
   @IsNotEmpty({ message: 'El rol es obligatorio' })

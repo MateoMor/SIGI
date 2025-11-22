@@ -79,7 +79,34 @@ Retorna un \`access_token\` que debes usar en los demás endpoints protegidos.
   @Public()
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({ summary: 'Registrar nuevo usuario' })
+  @ApiOperation({ 
+    summary: 'Registrar nuevo usuario',
+    description: `
+**Endpoint público - No requiere autenticación**
+
+Crea un nuevo usuario en el sistema. Debes especificar uno de los siguientes roles:
+
+**Roles disponibles:**
+- \`EMPLEADO\` - Usuario regular que puede reportar incapacidades
+- \`RRHH\` - Personal de Recursos Humanos con permisos de gestión
+- \`ADMIN\` - Administrador con acceso completo al sistema
+
+**Ejemplo de request:**
+\`\`\`bash
+curl -X POST http://localhost:3005/auth/register \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "nombre": "Juan Pérez",
+    "email": "juan@example.com",
+    "password": "password123",
+    "rol": "EMPLEADO"
+  }'
+\`\`\`
+
+**Respuesta:**
+Retorna un \`access_token\` que puedes usar inmediatamente en los demás endpoints protegidos.
+    `,
+  })
   @ApiBody({ type: RegisterDto })
   @ApiResponse({
     status: 201,
