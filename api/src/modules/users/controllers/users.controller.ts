@@ -56,7 +56,17 @@ export class UsersController {
   @Get()
   @ApiOperation({
     summary: 'Listar todos los usuarios',
-    description: 'Solo accesible para usuarios con rol ADMIN o RRHH',
+    description: `
+**Requiere autenticación y rol ADMIN o RRHH**
+
+**Ejemplo de request:**
+\`\`\`bash
+curl -X GET http://localhost:3005/users \\
+  -H "Authorization: Bearer tu-token-de-admin-o-rrhh"
+\`\`\`
+
+**Nota:** Si tu token es de un usuario EMPLEADO, recibirás un error 403 Forbidden.
+    `,
   })
   @ApiResponse({
     status: 200,
@@ -64,20 +74,27 @@ export class UsersController {
     schema: {
       example: {
         message: 'Lista de usuarios',
-        total: 2,
+        total: 4,
         users: [
           {
-            id: '123e4567-e89b-12d3-a456-426614174000',
-            nombre: 'Juan Pérez',
-            email: 'juan@example.com',
-            rol: 'EMPLEADO',
+            id: 'd92301cb-6fae-49f6-bd33-1ad00fb02ad8',
+            nombre: 'Administrador Sistema',
+            email: 'admin@sigi.com',
+            rol: 'ADMIN',
             created_at: '2025-11-21T22:45:21.221599+00:00',
+          },
+          {
+            id: '508b6786-ff5f-449f-9233-b33636ca8061',
+            nombre: 'Usuario Prueba',
+            email: 'test@test.com',
+            rol: 'EMPLEADO',
+            created_at: '2025-11-21T23:21:55.824707+00:00',
           },
         ],
       },
     },
   })
-  @ApiResponse({ status: 401, description: 'No autenticado' })
+  @ApiResponse({ status: 401, description: 'No autenticado - Token no proporcionado' })
   @ApiResponse({
     status: 403,
     description: 'Acceso denegado. Requiere rol ADMIN o RRHH',

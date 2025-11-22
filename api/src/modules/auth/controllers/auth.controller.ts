@@ -32,18 +32,36 @@ export class AuthController {
   @Public()
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Login de usuario' })
+  @ApiOperation({ 
+    summary: 'Login de usuario',
+    description: `
+**Endpoint público - No requiere autenticación**
+
+**Ejemplo de request:**
+\`\`\`bash
+curl -X POST http://localhost:3005/auth/login \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "email": "test@test.com",
+    "password": "password123"
+  }'
+\`\`\`
+
+**Respuesta:**
+Retorna un \`access_token\` que debes usar en los demás endpoints protegidos.
+    `,
+  })
   @ApiBody({ type: LoginDto })
   @ApiResponse({
     status: 200,
-    description: 'Login exitoso',
+    description: 'Login exitoso - Guarda el access_token para usarlo en otros endpoints',
     schema: {
       example: {
-        access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
+        access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1MDhiNjc4Ni1mZjVmLTQ0OWYtOTIzMy1iMzM2MzZjYTgwNjEiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJyb2wiOiJFTVBMRUFETyIsIm5vbWJyZSI6IlVzdWFyaW8gUHJ1ZWJhIiwiaWF0IjoxNzYzNzY3NDgzLCJleHAiOjE3NjQzNzIyODN9.NdbjzEoI45BGrBbm_HKhPbIU3snKNV2sT5dcaE97GEU',
         user: {
-          id: '123e4567-e89b-12d3-a456-426614174000',
-          nombre: 'Juan Pérez',
-          email: 'juan@example.com',
+          id: '508b6786-ff5f-449f-9233-b33636ca8061',
+          nombre: 'Usuario Prueba',
+          email: 'test@test.com',
           rol: 'EMPLEADO',
         },
       },
@@ -91,7 +109,21 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Get('me')
   @ApiBearerAuth('JWT-auth')
-  @ApiOperation({ summary: 'Obtener perfil del usuario autenticado' })
+  @ApiOperation({ 
+    summary: 'Obtener perfil del usuario autenticado',
+    description: `
+**Requiere autenticación:**
+- Click en el botón "Authorize" 🔒 arriba
+- Pega tu token JWT (sin "Bearer", solo el token)
+- O incluye el header: \`Authorization: Bearer tu-token-aqui\`
+
+**Ejemplo de request:**
+\`\`\`bash
+curl -X GET http://localhost:3005/auth/me \\
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+\`\`\`
+    `,
+  })
   @ApiResponse({
     status: 200,
     description: 'Perfil del usuario',
@@ -107,7 +139,7 @@ export class AuthController {
       },
     },
   })
-  @ApiResponse({ status: 401, description: 'No autenticado' })
+  @ApiResponse({ status: 401, description: 'No autenticado - Token no proporcionado o inválido' })
   getProfile(@CurrentUser() user) {
     return {
       message: 'Usuario autenticado',
