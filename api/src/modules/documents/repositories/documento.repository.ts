@@ -74,6 +74,16 @@ export class DocumentoRepository extends BaseRepository<Documento> {
   }
 
   /**
+   * Buscar documentos por formato
+   */
+  async findByFormato(formato: string): Promise<Documento[]> {
+    return this.findMany(
+      { formato } as Partial<Record<keyof Documento, any>>,
+      { column: 'fecha_subida', ascending: false },
+    );
+  }
+
+  /**
    * Obtener tamaño total de documentos de una incapacidad
    */
   async getTotalSizeByIncapacidad(incapacidadId: string): Promise<number> {
