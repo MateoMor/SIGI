@@ -4,7 +4,7 @@ import { inject, Injectable } from '@angular/core';
 @Injectable()
 export class ApiService {
   private http = inject(HttpClient);
-  private base = 'http://localhost:3000';
+  private base = 'http://localhost:3005';
 
   get(path: string) {
     return this.http.get(`${this.base}${path}`);
