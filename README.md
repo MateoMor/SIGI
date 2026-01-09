@@ -73,7 +73,7 @@ cp .env.example .env
 ```env
 # Entorno
 NODE_ENV=development
-PORT=3000
+PORT=3005
 
 # Supabase (obtener de tu proyecto en supabase.com)
 SUPABASE_URL=https://tu-proyecto.supabase.co
@@ -164,9 +164,9 @@ npm start
 | Servicio | URL |
 |----------|-----|
 | Frontend | http://localhost:4200 |
-| Backend API | http://localhost:3000 |
-| Swagger Docs | http://localhost:3000/docs |
-| OpenAPI JSON | http://localhost:3000/docs-json |
+| Backend API | http://localhost:3005 |
+| Swagger Docs | http://localhost:3005/docs |
+| OpenAPI JSON | http://localhost:3005/docs-json |
 
 ---
 
