@@ -27,9 +27,9 @@ The system centralizes information, reduces redundant processes, improves tracea
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="./docs/images/dashboard.png" alt="Dashboard" width="400" hspace="10" vspace="10" />
-  <img src="./docs/images/databse_schema.png" alt="Database Schema" width="400" hspace="10" vspace="10" />
-  <img src="./docs/images/swagger_auth_user.png" alt="Swagger" width="400" hspace="10" vspace="10" />
+  <img src="./docs/images/dashboard.png" alt="Dashboard" width="320" hspace="10" vspace="10" />
+  <img src="./docs/images/databse_schema.png" alt="Database Schema" width="320" hspace="10" vspace="10" />
+  <img src="./docs/images/swagger_auth_user.png" alt="Swagger" width="320" hspace="10" vspace="10" />
 </div>
 
 ---
