@@ -6,11 +6,11 @@
 ![Angular](https://img.shields.io/badge/Angular-v20-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![License](https://img.shields.io/badge/License-See%20LICENSE-blue?style=for-the-badge)
+[![License](https://img.shields.io/badge/License-See%20LICENSE-blue?style=for-the-badge)](#-license)
 
 **A full-stack enterprise web platform for managing medical leave records, document handling, and HR analytics.**
 
-[Features](#-key-features) • [Architecture](#-architecture) • [Tech Stack](#-technology-stack) • [Getting Started](#-getting-started) • [API Documentation](#-api-documentation)
+[Features](#-key-features) • [Architecture](#-architecture) • [Tech Stack](#-technology-stack) • [Getting Started](#-getting-started) • [API Documentation](#-api-documentation) • [License](#-license)
 
 </div>
 
