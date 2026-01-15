@@ -188,7 +188,7 @@ Configure your `.env` file:
 ```env
 # Environment
 NODE_ENV=development
-PORT=3000
+PORT=3005
 
 # Supabase (get from your project at supabase.com)
 SUPABASE_URL=https://your-project.supabase.co
