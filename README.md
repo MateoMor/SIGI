@@ -10,7 +10,7 @@
 
 **A full-stack enterprise web platform for managing medical leave records, document handling, and HR analytics.**
 
-[Features](#-key-features) • [Architecture](#-architecture) • [Tech Stack](#-technology-stack) • [Getting Started](#-getting-started) • [API Documentation](#-api-documentation) • [License](#-license)
+[Features](#-key-features) • [Architecture](#-architecture) • [Tech Stack](#-technology-stack) • [Getting Started](#-getting-started) • [API Documentation](#-api-documentation)
 
 </div>
 
@@ -21,6 +21,20 @@
 **SIGI** (_Sistema de Gestión de Incapacidades_) is a comprehensive web platform designed to streamline the registration, administration, and tracking of medical leave records within an organization.
 
 The system centralizes information, reduces redundant processes, improves traceability, and provides powerful analytical tools for Human Resources departments.
+
+---
+
+## 📸 Screenshots
+
+<div align="center">
+
+<img src="./docs/images/dashboard.png" alt="Dashboard" width="600">
+<br><br>
+<img src="./docs/images/databse_schema.png" alt="Database Schema" width="600">
+<br><br>
+<img src="./docs/images/swagger_auth_user.png" alt="Swagger" width="600">
+
+</div>
 
 ---
 
